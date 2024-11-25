@@ -10,9 +10,6 @@ User Roles:
 
 ->Job Seekers:
 
-
-
-
     Create an account, upload resumes, and apply for job postings.
 
 
@@ -21,17 +18,11 @@ User Roles:
     
 ->Job Posters:
 
-
-
-
     Post job openings and analyze applicants' resumes using AI.
 
 
     
 ->AI-Powered Resume Analysis:
-
-
-
 
     Leveraging the Llama 3.1 model via the Ollama platform, resumes are analyzed to provide actionable insights.
 
@@ -39,7 +30,6 @@ User Roles:
 
     
 ->Job Posting Management:
-
 
 
     Job posters can manage job listings and view applications from candidates.
