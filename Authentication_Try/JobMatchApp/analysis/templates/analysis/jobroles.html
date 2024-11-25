@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Search Page</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <style>
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2a2a72;
+    color: white;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* Styling for regular links */
+.nav-links a:not(.button) {
+    color: white;
+}
+
+.nav-links a:hover {
+    color: #ffb703;
+}
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .job-search-page {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .job-search-container {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        height: 480px;
+      }
+      .filters-sidebar {
+        width: 250px;
+        background-color: #2a2a72;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-right: 20px;
+      }
+      .filters-sidebar h3 {
+        text-align: center;
+      }
+      .filter-group {
+        margin-bottom: 15px;
+      }
+      .filter-group label {
+        display: block;
+        font-weight: bold;
+      }
+      .filter-group input,
+      .filter-group select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      .apply-filters-btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #ffb703;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .apply-filters-btn:hover {
+        background-color: #ffa533;
+      }
+      .job-listings {
+        flex: 1;
+      }
+      .search-bar {
+        margin-bottom: 20px;
+      }
+      .search-bar input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .job-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .job-card {
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      /* Job Card Styling */
+  .job-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .job-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .job-card p {
+    margin: 4px 0;
+    color: #555;
+  }
+  
+  /* Apply Now Button Styling */
+  .apply-now-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .apply-now-btn:hover {
+    background-color: #45a049;
+  }
+  
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Job FitPro</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'jobroles' %}">Job Roles</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'signup' %}" class="button sign-up">Sign Up</a></li>
+            <li><a href="{% url 'login' %}" class="button login">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="job-search-page">
+    <div class="job-search-container">
+      <aside class="filters-sidebar">
+        <h3>Filters</h3>
+        <div class="filter-group">
+          <label for="experience">Experience</label>
+          <select id="experience">
+            <option value="">Select</option>
+            <option value="0-2 Yrs">0-2 Yrs</option>
+            <option value="2-5 Yrs">2-5 Yrs</option>
+            <option value="5-10 Yrs">5-10 Yrs</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="skills">Skills</label>
+          <input type="text" id="skills" placeholder="e.g. JavaScript, Python">
+        </div>
+        <div class="filter-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="e.g. Chennai, Bengaluru">
+        </div>
+        <div class="filter-group">
+          <label for="salary">Salary Range</label>
+          <select id="salary">
+            <option value="">Select</option>
+            <option value="0-3 Lacs PA">0-3 Lacs PA</option>
+            <option value="3-6 Lacs PA">3-6 Lacs PA</option>
+            <option value="6-10 Lacs PA">6-10 Lacs PA</option>
+            <option value="10+ Lacs PA">10+ Lacs PA</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="datePosted">Date Posted</label>
+          <select id="datePosted">
+            <option value="">Select</option>
+            <option value="Last 24 Hours">Last 24 Hours</option>
+            <option value="Last 7 Days">Last 7 Days</option>
+            <option value="Last 30 Days">Last 30 Days</option>
+          </select>
+        </div>
+        <button onclick="applyFilters()" class="apply-filters-btn">Apply Filters</button>
+      </aside>
+
+      <main class="job-listings">
+        <div class="search-bar">
+          <input type="text" id="searchTerm" placeholder="Search for jobs..." oninput="applyFilters()">
+        </div>
+        <div id="jobList" class="job-list">
+          <!-- Job cards generated dynamically -->
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const jobs = [
+      // Sample jobs array
+      {
+        title: 'Fullstack Developer',
+        company: 'Testpress Tech Labs Llp',
+        experience: '0-2 Yrs',
+        salary: '₹ 3.5-4.5 Lacs PA',
+        location: 'Chennai',
+        posted: '28 Days Ago',
+        skills: ['JavaScript', 'React', 'Node.js']
+      },
+      {
+        title: 'Data Scientist',
+        company: 'Big Data Solutions',
+        experience: '3-5 Yrs',
+        salary: '₹ 8-10 Lacs PA',
+        location: 'Bengaluru',
+        posted: '7 Days Ago',
+        skills: ['Python', 'Machine Learning', 'SQL', 'R']
+      },
+      {
+        title: 'Backend Developer',
+        company: 'Tech Solutions Pvt Ltd',
+        experience: '2-5 Yrs',
+        salary: '₹ 5-7 Lacs PA',
+        location: 'Bengaluru',
+        posted: '7 Days Ago',
+        skills: ['Python', 'Django', 'REST API']
+      },
+      {
+        title: 'Fullstack Developer',
+        company: 'Testpress Tech Labs Llp',
+        experience: '0-2 Yrs',
+        salary: '₹ 3.5-4.5 Lacs PA',
+        location: 'Chennai',
+        posted: '28 Days Ago',
+        skills: ['JavaScript', 'React', 'Node.js']
+      },
+      {
+          title: 'Backend Developer',
+          company: 'DataSys Ltd',
+          experience: '3-5 Yrs',
+          salary: '₹ 8-10 Lacs PA',
+          location: 'Pune',
+          posted: '5 Days Ago',
+          skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs']
+        },
+      {
+        title: 'Backend Developer',
+        company: 'Tech Solutions Pvt Ltd',
+        experience: '2-5 Yrs',
+        salary: '₹ 5-7 Lacs PA',
+        location: 'Bengaluru',
+        posted: '7 Days Ago',
+        skills: ['Python', 'Django', 'REST API']
+      },
+      {
+        title: 'Frontend Developer',
+        company: 'Innova Tech',
+        experience: '1-3 Yrs',
+        salary: '₹ 4-6 Lacs PA',
+        location: 'Mumbai',
+        posted: '3 Days Ago',
+        skills: ['HTML', 'CSS', 'JavaScript', 'React']
+      },
+      {
+        title: 'Data Analyst',
+        company: 'Data Inc.',
+        experience: '0-2 Yrs',
+        salary: 'Not disclosed',
+        location: 'Chennai',
+        posted: 'Last 24 Hours',
+        skills: ['SQL', 'Python', 'Excel']
+      },
+      {
+        title: 'Fullstack Developer',
+        company: 'E2E Infoware',
+        experience: '1-5 Yrs',
+        salary: 'Not disclosed',
+        location: 'Chennai, Bengaluru',
+        posted: '30+ Days Ago',
+        skills: ['Java', 'C#', 'C++', 'Perl', 'UI Technologies']
+      },
+        {
+          title: 'Data Scientist',
+          company: 'Big Data Solutions',
+          experience: '3-5 Yrs',
+          salary: '₹ 8-10 Lacs PA',
+          location: 'Bengaluru',
+          posted: '7 Days Ago',
+          skills: ['Python', 'Machine Learning', 'SQL', 'R']
+        },
+        {
+          title: 'Junior Data Scientist',
+          company: 'DataMind Analytics',
+          experience: '0-2 Yrs',
+          salary: '₹ 4-6 Lacs PA',
+          location: 'Delhi',
+          posted: '15 Days Ago',
+          skills: ['Python', 'SQL', 'Pandas', 'Data Analysis']
+        },
+        {
+          title: 'Senior Data Scientist',
+          company: 'AI Innovations',
+          experience: '5-8 Yrs',
+          salary: '₹ 12-15 Lacs PA',
+          location: 'Hyderabad',
+          posted: '10 Days Ago',
+          skills: ['Python', 'Deep Learning', 'NLP', 'TensorFlow']
+        },
+        {
+          title: 'Machine Learning Engineer',
+          company: 'Neural Networks Ltd',
+          experience: '3-5 Yrs',
+          salary: '₹ 10-12 Lacs PA',
+          location: 'Chennai',
+          posted: '5 Days Ago',
+          skills: ['Python', 'Machine Learning', 'Scikit-Learn', 'Keras']
+        },
+        {
+          title: 'Data Analyst',
+          company: 'InfoTech Solutions',
+          experience: '1-3 Yrs',
+          salary: '₹ 5-7 Lacs PA',
+          location: 'Pune',
+          posted: '20 Days Ago',
+          skills: ['SQL', 'Excel', 'Power BI', 'Python']
+        },
+        {
+          title: 'Product Designer',
+          company: 'Innovative Creations',
+          experience: '3-5 Yrs',
+          salary: '₹ 7-9 Lacs PA',
+          location: 'Bengaluru',
+          posted: '12 Days Ago',
+          skills: ['Sketch', 'Photoshop', 'UI Design', 'User Research']
+        },
+        {
+          title: 'Junior UI Designer',
+          company: 'Pixel Perfect Ltd',
+          experience: '0-2 Yrs',
+          salary: '₹ 2-4 Lacs PA',
+          location: 'Mumbai',
+          posted: '20 Days Ago',
+          skills: ['Figma', 'Adobe Illustrator', 'CSS', 'HTML']
+        },
+        {
+          title: 'UX Researcher',
+          company: 'DesignHub',
+          experience: '2-4 Yrs',
+          salary: '₹ 6-8 Lacs PA',
+          location: 'Hyderabad',
+          posted: '10 Days Ago',
+          skills: ['User Research', 'Prototyping', 'Usability Testing']
+        },
+        {
+          title: 'Senior UI/UX Designer',
+          company: 'Appify Solutions',
+          experience: '4-6 Yrs',
+          salary: '₹ 10-12 Lacs PA',
+          location: 'Pune',
+          posted: '3 Days Ago',
+          skills: ['Wireframing', 'User Flow', 'Interaction Design']
+        },
+        {
+          title: 'Fullstack Developer',
+          company: 'Innova Solutions',
+          experience: '2-4 Yrs',
+          salary: '₹ 5-7 Lacs PA',
+          location: 'Bengaluru',
+          posted: '14 Days Ago',
+          skills: ['Java', 'Spring Boot', 'React', 'SQL']
+        },
+        {
+          title: 'Fullstack Developer',
+          company: 'E2E Infoware',
+          experience: '1-5 Yrs',
+          salary: '₹ 6-8 Lacs PA',
+          location: 'Chennai, Bengaluru',
+          posted: '30+ Days Ago',
+          skills: ['Java', 'C#', 'C++', 'Perl', 'UI Technologies']
+        },
+        {
+          title: 'Fullstack Engineer',
+          company: 'Techverse Solutions',
+          experience: '3-5 Yrs',
+          salary: '₹ 8-10 Lacs PA',
+          location: 'Mumbai',
+          posted: '2 Days Ago',
+          skills: ['JavaScript', 'Angular', 'Node.js', 'MongoDB']
+        },
+        {
+          title: 'Fullstack Developer',
+          company: 'SmartLogic Pvt Ltd',
+          experience: '4-6 Yrs',
+          salary: '₹ 10-12 Lacs PA',
+          location: 'Hyderabad',
+          posted: '1 Day Ago',
+          skills: ['Python', 'Django', 'React', 'PostgreSQL']
+        },
+        {
+          title: 'Software Engineer',
+          company: 'Tech Innovators Ltd.',
+          experience: '2-4 Yrs',
+          salary: '₹ 6-8 Lacs PA',
+          location: 'Hyderabad',
+          posted: '14 Days Ago',
+          skills: ['Java', 'Spring Boot', 'Microservices', 'REST API']
+        },
+        {
+          title: 'Fullstack Developer',
+          company: 'Testpress Tech Labs Llp',
+          experience: '0-2 Yrs',
+          salary: '₹ 6-10 LPA',
+          location: 'Chennai',
+          posted: 'Last 7 days',
+          skills: ['JavaScript', 'React', 'Node.js']
+        },
+        {
+          title: 'UI/UX Designer',
+          company: 'Creative Minds',
+          experience: '1-3 Yrs',
+          salary: '₹ 3-5 Lacs PA',
+          location: 'Delhi',
+          posted: '5 Days Ago',
+          skills: ['Figma', 'Adobe XD', 'Wireframing', 'Prototyping']
+        },
+        {
+          title: 'Backend Engineer',
+          company: 'CodeWorks',
+          experience: '2-4 Yrs',
+          salary: '₹ 7-9 Lacs PA',
+          location: 'Hyderabad',
+          posted: '9 Days Ago',
+          skills: ['Java', 'Spring Boot', 'MySQL', 'Microservices']
+        },
+        {
+          title: 'Database Administrator',
+          company: 'Techverse',
+          experience: '4-6 Yrs',
+          salary: '₹ 9-11 Lacs PA',
+          location: 'Chennai',
+          posted: '7 Days Ago',
+          skills: ['SQL', 'Oracle', 'Database Management', 'PL/SQL']
+        },
+        {
+          title: 'Backend Developer',
+          company: 'Innovative Systems',
+          experience: '1-3 Yrs',
+          salary: '₹ 5-7 Lacs PA',
+          location: 'Bengaluru',
+          posted: '12 Days Ago',
+          skills: ['Python', 'Flask', 'PostgreSQL', 'API Development']
+        },
+        {
+          title: 'Server Engineer',
+          company: 'SkyTech Solutions',
+          experience: '5-7 Yrs',
+          salary: '₹ 12-14 Lacs PA',
+          location: 'Mumbai',
+          posted: '1 Day Ago',
+          skills: ['Ruby on Rails', 'MySQL', 'Redis', 'APIs']
+        },
+        {
+          title: 'React Developer',
+          company: 'WebGen Ltd',
+          experience: '2-4 Yrs',
+          salary: '₹ 5-7 Lacs PA',
+          location: 'Chennai',
+          posted: '8 Days Ago',
+          skills: ['React', 'Redux', 'JavaScript', 'CSS']
+        },
+        {
+          title: 'Angular Developer',
+          company: 'Digital Solutions',
+          experience: '3-5 Yrs',
+          salary: '₹ 6-9 Lacs PA',
+          location: 'Bengaluru',
+          posted: '10 Days Ago',
+          skills: ['Angular', 'TypeScript', 'JavaScript', 'HTML']
+        },
+        {
+          title: 'Frontend Engineer',
+          company: 'Pixel Inc.',
+          experience: '2-4 Yrs',
+          salary: '₹ 6-8 Lacs PA',
+          location: 'Hyderabad',
+          posted: '6 Days Ago',
+          skills: ['Vue.js', 'JavaScript', 'CSS', 'HTML']
+        },
+        {
+          title: 'Web Developer',
+          company: 'Appify Web Solutions',
+          experience: '1-2 Yrs',
+          salary: '₹ 3-5 Lacs PA',
+          location: 'Delhi',
+          posted: '15 Days Ago',
+          skills: ['HTML', 'CSS', 'Bootstrap', 'jQuery']
+        },
+        {
+          title: 'Project Manager',
+          company: 'Enterprise Corp',
+          experience: '5-7 Yrs',
+          salary: '₹ 10-15 Lacs PA',
+          location: 'Pune',
+          posted: '30+ Days Ago',
+          skills: ['Project Management', 'Agile', 'Scrum', 'Leadership']
+        },
+        {
+          title: 'Backend Developer',
+          company: 'Global Tech Solutions',
+          experience: '3-6 Yrs',
+          salary: '₹ 8-10 Lacs PA',
+          location: 'Noida',
+          posted: '10 Days Ago',
+          skills: ['Node.js', 'Express.js', 'MongoDB', 'AWS']
+        },
+        {
+          title: 'DevOps Engineer',
+          company: 'Automation Hub',
+          experience: '2-5 Yrs',
+          salary: '₹ 7-9 Lacs PA',
+          location: 'Gurgaon',
+          posted: '20 Days Ago',
+          skills: ['Docker', 'Kubernetes', 'CI/CD', 'AWS', 'Jenkins']
+        },
+        {
+          title: 'Machine Learning Engineer',
+          company: 'AI Dynamics',
+          experience: '2-4 Yrs',
+          salary: '₹ 9-12 Lacs PA',
+          location: 'Bengaluru',
+          posted: '15 Days Ago',
+          skills: ['Python', 'TensorFlow', 'Pandas', 'Scikit-Learn']
+        },
+        {
+          title: 'Business Analyst',
+          company: 'Insight Analytics',
+          experience: '1-3 Yrs',
+          salary: '₹ 5-7 Lacs PA',
+          location: 'Mumbai',
+          posted: '3 Days Ago',
+          skills: ['Business Analysis', 'SQL', 'Excel', 'Data Visualization']
+        },
+        {
+          title: 'Product Manager',
+          company: 'FinTech Innovations',
+          experience: '4-6 Yrs',
+          salary: '₹ 12-15 Lacs PA',
+          location: 'Pune',
+          posted: 'Last 24 Hours',
+          skills: ['Product Management', 'Agile', 'Roadmapping', 'Stakeholder Management']
+        },
+        {
+          title: 'Cybersecurity Specialist',
+          company: 'SecureTech',
+          experience: '3-5 Yrs',
+          salary: '₹ 9-11 Lacs PA',
+          location: 'Hyderabad',
+          posted: 'Last 7 Days',
+          skills: ['Network Security', 'Firewalls', 'Threat Detection', 'Risk Assessment']
+        },
+        {
+          title: 'Mobile App Developer',
+          company: 'Appify Solutions',
+          experience: '1-3 Yrs',
+          salary: '₹ 4-6 Lacs PA',
+          location: 'Chennai',
+          posted: '28 Days Ago',
+          skills: ['React Native', 'Flutter', 'Android', 'iOS']
+        },
+        {
+          title: 'Cloud Architect',
+          company: 'Cloudify',
+          experience: '5+ Yrs',
+          salary: '₹ 15-20 Lacs PA',
+          location: 'Bengaluru',
+          posted: '30+ Days Ago',
+          skills: ['AWS', 'Azure', 'GCP', 'Cloud Infrastructure', 'Networking']
+        }
+    
+      // Add more job entries as needed
+    ];
+
+    function displayJobs(filteredJobs) {
+      const jobList = document.getElementById('jobList');
+      jobList.innerHTML = '';
+      filteredJobs.forEach((job) => {
+        const jobCard = document.createElement('div');
+        jobCard.className = 'job-card';
+        jobCard.innerHTML = `
+          <h3>${job.title}</h3>
+          <p>${job.company}</p>
+          <p>${job.experience} | ${job.salary} | ${job.location}</p>
+          <p>Skills: ${job.skills.join(', ')}</p>
+          <p>Posted: ${job.posted}</p>
+          <a href="{% url 'apply_1' %}" class="apply-now-btn">Apply Now</a>
+          
+        `;
+        jobList.appendChild(jobCard);
+      });
+    }
+    
+
+    function applyFilters() {
+      // Filtering logic remains the same
+      const searchTerm = document.getElementById('searchTerm').value.toLowerCase();
+      const experience = document.getElementById('experience').value;
+      const skills = document.getElementById('skills').value.toLowerCase();
+      const location = document.getElementById('location').value.toLowerCase();
+      const salary = document.getElementById('salary').value;
+      const datePosted = document.getElementById('datePosted').value;
+
+      const filteredJobs = jobs.filter((job) => {
+        return (
+          (searchTerm === '' || job.title.toLowerCase().includes(searchTerm)) &&
+          (experience === '' || job.experience === experience) &&
+          (skills === '' || job.skills.some(skill => skill.toLowerCase().includes(skills))) &&
+          (location === '' || job.location.toLowerCase().includes(location)) &&
+          (salary === '' || job.salary.includes(salary)) &&
+          (datePosted === '' || job.posted.includes(datePosted))
+        );
+      });
+
+      displayJobs(filteredJobs);
+    }
+
+    
+
+    displayJobs(jobs);
+  </script>
+</body>
+</html>

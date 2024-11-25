@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Job</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="file"] {
+      width: 100%;
+      margin-top: 5px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Resume</h1>
+  <form id="jobApplicationForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="resume">Resume (PDF):</label>
+    <input type="file" id="resumeFile" name="resume" accept=".pdf"><br><br>
+    <button type="button" onclick="submitApplication()">Submit</button>
+  </form>
+  <script>
+    function submitApplication() {
+      const fileInput = document.getElementById('resumeFile');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const formData = new FormData();
+        formData.append('resume', file);
+
+        fetch('', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}' // Django's CSRF token for secure requests
+          }
+        })
+        .then(response => {
+          // Check if the response is OK
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // Parse response as JSON
+        })
+        .then(data => {
+                if (data.message) {
+                    alert(data.message); // Display the success message from the backend
+                    window.location.href = "{% url 'index' %}"; // Redirect to the index page
+                } else {
+                    alert('Unexpected response from the server.');
+                }
+            })
+        
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while uploading the resume. Please try again.');
+        });
+      } else {
+        alert('Please upload a file.');
+      }
+    }
+</script>
+
+</body>
+</html>

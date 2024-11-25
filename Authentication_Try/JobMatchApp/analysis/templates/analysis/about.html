@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Job FitPro</title>
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #2a2a72;
+            color: white;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            display: inline;
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffb703;
+        }
+
+        .about-section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .about-heading {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .about-heading.right {
+            flex-direction: row;
+        }
+
+        .about-heading.left {
+            flex-direction: row-reverse;
+        }
+
+        .about-heading img {
+            flex: 1;
+            max-width: 400px; /* Limit image size */
+            border-radius: 8px;
+            margin: 0 20px;
+        }
+
+        .about-heading div {
+            flex: 2; /* Text takes more space */
+        }
+
+        .about-heading h3 {
+            font-size: 28px;
+            color: #2a2a72;
+            margin: 0 0 10px;
+        }
+
+        .about-heading p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        footer {
+            background-color: #2a2a72;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Job FitPro</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'jobroles' %}">Job Roles</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'login' %}" class="button login">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="about-section">
+        <center><h2>About Job FitPro</h2></center>
+
+        <div class="about-heading right">
+            <img src="{% static 'images/vision.avif' %}" width = "400px" height="300px" alt="Our Mission">
+            <div>
+                <h3>Our Mission</h3>
+                <p>
+                    Our mission is to create an intelligent recruitment platform that matches candidates with their ideal job roles, ensuring a better fit for both employers and job seekers. We aim to reduce the time and resources spent on recruitment by using technology to enhance the decision-making process.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-heading left">
+            <img src="{% static 'images/mission.jpg' %}" width = "400px" height="300px" alt="Our Vision">
+            <div>
+                <h3>Our Vision</h3>
+                <p>
+                    We envision a world where every individual has access to opportunities that align with their talents and ambitions, and where organizations can build diverse and effective teams that drive innovation and success.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-heading right">
+            <img src="{% static 'images/values.avif' %}" width = "400px" height="300px"alt="Our Values">
+            <div>
+                <h3>Our Values</h3>
+                <p>
+                    We believe in integrity, innovation, empowerment, and diversity. Our values drive our approach to recruitment and the technology we develop to support it.
+                </p>
+            </div>
+        </div>
+
+        <!-- <div class="about-heading left">
+            <img src="./" alt="Meet Our Team">
+            <div>
+                <h3>Meet Our Team</h3>
+                <p>
+                    Our team consists of industry experts, data scientists, and HR professionals passionate about recruitment and technology. Together, we work to refine our platform to meet the evolving needs of job seekers and employers.
+                </p>
+            </div>
+        </div> -->
+
+        <div class="about-heading left">
+            <img src="{% static 'images/imapct.avif' %}" width = "400px" height="300px" alt="Our Impact">
+            <div>
+                <h3>Our Impact</h3>
+                <p>
+                    Since our inception, Job FitPro has helped thousands of candidates find their dream jobs and assisted numerous companies in building strong, effective teams. We take pride in shaping careers and driving organizational success through effective recruitment.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-heading right">
+            <!-- <img src="https://via.placeholder.com/400x300" alt="Get Involved"> -->
+            <div>
+                <h3>Get Involved</h3>
+                <p>
+                    Whether you're a job seeker or an employer, we invite you to join the Job FitPro community. Explore our platform, and let us help you take the next step in your career or hiring journey!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Job FitPro. All rights reserved.</p>
+    </footer>
+</body>
+</html>

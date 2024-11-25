@@ -1,0 +1,187 @@
+/* Resetting some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2a2a72;
+    color: white;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* Styling for regular links */
+.nav-links a:not(.button) {
+    color: white;
+}
+
+.nav-links a:hover {
+    color: #ffb703;
+}
+
+/* Button styles for Sign Up and Login */
+.button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.sign-up {
+    background-color: #008080;
+    color: #2a2a72;
+    border: 1px solid transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sign-up:hover {
+    background-color: #008080;
+    color: #fff;
+}
+
+.login {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #008080;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* .login:hover {
+    background-color: #ffb703;
+    color: white;
+} */
+
+/* Hero Section styling */
+.hero {
+    background-image: url('./interview.avif');
+    background-size: cover;
+    color: #333333;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 24px;
+    font-style: italic;
+}
+
+/* About Section styling */
+.about, .goals {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.about img, .goal-images img {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Goals Section styling */
+.goal-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #2a2a72;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+
+
+.auth-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f9f9f9; /* Light gray background for contrast */
+    
+}
+
+.auth-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.auth-section form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.auth-section label {
+    margin-top: 10px;
+    display: block;
+    font-weight: bold;
+}
+
+.auth-section input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.auth-section .button {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.auth-section p {
+    margin-top: 20px;
+}
+
+
+.google-signup {
+    background-color: #db4437; /* Google Red */
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-bottom: 20px; /* Space between Google button and form */
+}
+
+.google-signup:hover {
+    background-color: #c13527; /* Darker red on hover */
+}
+
